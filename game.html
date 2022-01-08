@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>もぐらたたき</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <p id="title">もぐらたたきゲーム</p>
+        <div class="stage">
+            <div><img src="./images/mogura.png" id="mogura1"></div>
+            <div><img src="./images/mogura.png" id="mogura2"></div>
+            <div><img src="./images/mogura.png" id="mogura3"></div>
+        </div>
+        <div id="scoreBoard">
+            <div id="points">点</div>
+            <div id="remain">秒</div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //もぐらを管理する
+            const mogura1 = $("#mogura1")
+            const mogura2 = $("#mogura2")
+            const mogura3 = $("#mogura3")
+
+            //点数
+            let score = 0
+
+            //タイマー
+            let remain = 30
+
+            //スコアボード
+            const scoreBoard = $("#points")
+            scoreBoard.text("0点")
+            const remainTimer = $("#remain")
+            remainTimer.text(remain+"秒")
+
+            //もぐらを消す
+            mogura1.hide()
+            mogura2.hide()
+            mogura3.hide()
+
+            //もぐらを出したり消したりする
+            game = setInterval(function(){
+                const number = Math.floor(Math.random() * 3) + 1;
+                mogura = $('#mogura'+number)
+                mogura.fadeIn(1000)
+                setTimeout(function(){
+                    mogura.fadeOut(1000)
+                }, 2000)
+            },3000)
+
+            //ゲームの残り時間を管理
+            gameTimer = setInterval(function(){
+                remain -= 1
+                if(remain <= 0){
+                    clearInterval(game)
+                    clearInterval(gameTimer)
+                    remainTimer.text("GameOVer")
+                }else{
+                    remainTimer.text(remain+"秒")
+                }
+                
+            },1000)
+
+            //もぐらのクリックを管理
+            mogura1.on('click',function(){
+                scoreUp()
+            })
+
+            mogura2.on('click',function(){
+                scoreUp()
+            })
+
+            mogura3.on('click',function(){
+                scoreUp()
+            })
+            
+            function scoreUp(){
+                if(remain>0){
+                    score++
+                    console.log(score)
+                    scoreBoard.text(score + "点")
+                }   
+            }
+
+        });
+    </script>
+</body>
+</html>

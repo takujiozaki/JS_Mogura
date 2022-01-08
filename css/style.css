@@ -1,0 +1,58 @@
+img{
+    width: 200px;
+    height: 200px;
+}
+
+.stage{
+    width: 80%;
+    height: 250px;
+    margin: 0 auto;
+    display:flex;
+    justify-content: space-around;
+}
+
+#title{
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#scoreBoard{
+    font-size: large;
+    width: 50%;
+    margin: 50px auto;
+    display:flex;
+    justify-content: space-around;
+}
+  
+.slidUp{
+    animation: SlideIn 1.6s;
+}
+
+.slidDown{
+    animation: SlideOut 1.6s;
+}
+
+/* CSSアニメーションの設定 */
+@keyframes SlideIn {
+    0% {
+        opacity: 0;/*初期状態では透明に*/
+        transform: translateY(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CSSアニメーションの設定 */
+@keyframes SlideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;/*終了では透明に*/
+        transform: translateY(200px);
+    }
+}
